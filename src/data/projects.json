@@ -1,0 +1,93 @@
+[
+  {
+    "id": "job-intel-agent",
+    "title": "Job Intel Agent",
+    "description": "Paste a job URL or raw text, upload your CV, and get back a match score (0-100%), ranked skill gaps, talking points, and a tailored pitch. Also rewrites your CV for that specific role.",
+    "tech": ["Python", "FastAPI", "Anthropic API", "Pydantic"],
+    "color": "#4fc3f7",
+    "url": "https://job-intel-agent.up.railway.app",
+    "github": "https://github.com/olavoshew/job-intel-agent",
+    "media": { "type": "video", "src": "" }
+  },
+  {
+    "id": "unity-showcase",
+    "title": "Unity Showcase",
+    "description": "Interactive 3D product visualization built in Unity. Lets users rotate, zoom, and inspect objects with realistic PBR materials and lighting.",
+    "tech": ["Unity", "C#", "ShaderGraph", "WebGL"],
+    "color": "#ab47bc",
+    "url": "https://github.com/olavoshew/unity-showcase",
+    "media": { "type": "video", "src": "" }
+  },
+  {
+    "id": "3d-portfolio",
+    "title": "3D Portfolio",
+    "description": "This site. A spatial portfolio where projects float in 3D space and the camera moves between them. Built with Three.js and vanilla JS.",
+    "tech": ["Three.js", "Vite", "GSAP", "JavaScript"],
+    "color": "#26c6da",
+    "url": "https://github.com/olavoshew/3d-portfolio",
+    "media": { "type": "", "src": "" }
+  },
+  {
+    "id": "video-automation",
+    "title": "Video Automation",
+    "description": "Automated video editing pipeline that processes raw footage into polished content. Handles cuts, transitions, overlays, and audio sync programmatically.",
+    "tech": ["Python", "FFmpeg", "Pillow", "MoviePy"],
+    "color": "#ef5350",
+    "url": "https://github.com/olavoshew/video-automation",
+    "media": { "type": "video", "src": "" }
+  },
+  {
+    "id": "webar",
+    "title": "WebAR",
+    "description": "Browser-based augmented reality experience that runs without an app install. Uses device camera and WebXR to overlay 3D content on the real world.",
+    "tech": ["A-Frame", "AR.js", "Three.js", "WebXR"],
+    "color": "#66bb6a",
+    "url": "https://github.com/olavoshew/webar",
+    "media": { "type": "iframe", "src": "" }
+  },
+  {
+    "id": "rag-tool",
+    "title": "RAG Tool",
+    "description": "Retrieval-augmented generation system for querying large document sets. Embeds documents into a vector store and uses LLMs to answer questions with citations.",
+    "tech": ["Python", "LangChain", "ChromaDB", "OpenAI"],
+    "color": "#ffa726",
+    "url": "https://github.com/olavoshew/rag-tool",
+    "media": { "type": "video", "src": "" }
+  },
+  {
+    "id": "game-jam",
+    "title": "Game Jam",
+    "description": "A game built in 48 hours for a competitive jam. Fast-paced 2D gameplay with procedural level generation and a custom physics system.",
+    "tech": ["Unity", "C#", "2D Toolkit", "Photoshop"],
+    "color": "#ec407a",
+    "url": "https://github.com/olavoshew/game-jam",
+    "media": { "type": "video", "src": "" }
+  },
+  {
+    "id": "cli-tool",
+    "title": "CLI Tool",
+    "description": "Developer productivity tool that runs from the terminal. Automates repetitive project setup, file scaffolding, and config generation tasks.",
+    "tech": ["Node.js", "Commander", "Chalk", "Inquirer"],
+    "color": "#78909c",
+    "url": "https://github.com/olavoshew/cli-tool",
+    "media": { "type": "", "src": "" }
+  },
+  {
+    "id": "motion-library",
+    "title": "Motion Library",
+    "description": "A collection of reusable animation primitives for web interfaces. Provides spring physics, easing curves, and gesture-driven motion out of the box.",
+    "tech": ["TypeScript", "GSAP", "Web Animations API", "npm"],
+    "color": "#ffca28",
+    "url": "https://github.com/olavoshew/motion-library",
+    "media": { "type": "", "src": "" }
+  },
+  {
+    "id": "ar-business-card",
+    "title": "AR Business Card",
+    "description": "Physical business card that triggers an AR experience when scanned. Displays a 3D model, contact links, and portfolio highlights floating above the card.",
+    "tech": ["Unity", "Vuforia", "Blender", "ARCore"],
+    "color": "#7e57c2",
+    "url": "https://github.com/olavoshew/ar-business-card",
+    "media": { "type": "video", "src": "" }
+  }
+]
