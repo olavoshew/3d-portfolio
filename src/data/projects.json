@@ -5,7 +5,7 @@
     "description": "Paste a job URL or raw text, upload your CV, and get back a match score (0-100%), ranked skill gaps, talking points, and a tailored pitch. Also rewrites your CV for that specific role.",
     "tech": ["Python", "FastAPI", "Anthropic API", "Pydantic"],
     "color": "#4fc3f7",
-    "url": "https://job-intel-agent.up.railway.app",
+    "url": "https://web-production-f7c5.up.railway.app/static/index.html",
     "github": "https://github.com/olavoshew/job-intel-agent",
     "media": { "type": "video", "src": "" }
   },
