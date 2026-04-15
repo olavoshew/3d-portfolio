@@ -2,7 +2,7 @@ HAND-OFF: 3D Portfolio -> Portfolio Website
 ============================================
 
 STATUS: Code complete, deployed to Vercel, pushed to GitHub.
-LIVE: https://3d-portfolio.vercel.app
+LIVE: https://3d-portfolio-sepia-alpha.vercel.app
 REPO: https://github.com/olavoshew/3d-portfolio
 
 STEP 1 - Verify Vercel deployment
@@ -17,7 +17,7 @@ STEP 1 - Verify Vercel deployment
 
 STEP 2 - Run Lighthouse
 ------------------------
-  npx lighthouse https://3d-portfolio.vercel.app --output=json --output-path=./lighthouse.json
+  npx lighthouse https://3d-portfolio-sepia-alpha.vercel.app --output=json --output-path=./lighthouse.json
   Update README.md with actual Performance and Accessibility scores.
 
 STEP 3 - Add to website
