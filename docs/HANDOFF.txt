@@ -1,0 +1,40 @@
+HAND-OFF: 3D Portfolio -> Portfolio Website
+============================================
+
+STATUS: Code complete, deployed to Vercel, pushed to GitHub.
+LIVE: https://3d-portfolio.vercel.app
+REPO: https://github.com/olavoshew/3d-portfolio
+
+STEP 1 - Verify Vercel deployment
+----------------------------------
+  Vercel should auto-deploy from the GitHub repo on push.
+  If not connected yet:
+    vercel login
+    vercel link (connect to existing project)
+    vercel --prod
+
+  Or connect via Vercel dashboard: Import Git Repository -> olavoshew/3d-portfolio
+
+STEP 2 - Run Lighthouse
+------------------------
+  npx lighthouse https://3d-portfolio.vercel.app --output=json --output-path=./lighthouse.json
+  Update README.md with actual Performance and Accessibility scores.
+
+STEP 3 - Add to website
+------------------------
+  File: c:\Code\Websites\_mine\index.html
+  Insert the HTML from: docs/portfolio-snippet.html
+  Place it after the last <article class="work-item"> block.
+  Update work-number if position changes.
+
+STEP 4 - Deploy website
+------------------------
+  cd c:\Code\Websites\_mine
+  npm run build
+  Deploy to hosting.
+
+FILES IN THIS HAND-OFF
+-----------------------
+  docs/portfolio-snippet.html   HTML block ready to paste into index.html
+  DECISIONS.md                  Architecture decisions and trade-offs
+  README.md                     Live link, tech stack, Lighthouse placeholder
