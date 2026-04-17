@@ -1,16 +1,26 @@
 import {
   PlaneGeometry,
-  MeshStandardMaterial,
+  MeshBasicMaterial,
   Mesh,
   CanvasTexture,
   Raycaster,
   Vector2,
   Vector3,
   Object3D,
-  Color,
   DoubleSide
 } from 'three'
-import { drawIcon } from './icons.js'
+export function loadIconImages(projects) {
+  return Promise.all(
+    projects.map((_, i) => {
+      return new Promise((resolve) => {
+        const img = new window.Image()
+        img.onload = () => resolve(img)
+        img.onerror = () => resolve(null)
+        img.src = `/img/icons/${i + 1}.png`
+      })
+    })
+  )
+}
 
 function roundRect(ctx, x, y, w, h, r) {
   ctx.beginPath()
@@ -33,8 +43,8 @@ function hexToRgb(hex) {
   return { r, g, b }
 }
 
-function createCardTexture(project) {
-  const { title, tags, color, id } = project
+function createCardTexture(project, iconImage) {
+  const { title, tags, color } = project
   const W = 768
   const H = 1024
   const canvas = document.createElement('canvas')
@@ -47,41 +57,68 @@ function createCardTexture(project) {
   ctx.clearRect(0, 0, W, H)
 
   const margin = 16
+
+  // Background: navy gradient
+  const bgGrad = ctx.createLinearGradient(0, 0, 0, H)
+  bgGrad.addColorStop(0, '#0B1220')
+  bgGrad.addColorStop(1, '#162033')
   roundRect(ctx, margin, margin, W - margin * 2, H - margin * 2, 28)
-  ctx.fillStyle = 'rgba(8, 8, 20, 0.88)'
+  ctx.fillStyle = bgGrad
   ctx.fill()
 
-  roundRect(ctx, margin, margin, W - margin * 2, H - margin * 2, 28)
-  ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, 0.6)`
-  ctx.lineWidth = 2
-  ctx.stroke()
-
-  for (let i = 3; i >= 1; i--) {
-    roundRect(ctx, margin - i * 3, margin - i * 3, W - (margin - i * 3) * 2, H - (margin - i * 3) * 2, 32)
-    ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${0.04 * (4 - i)})`
-    ctx.lineWidth = i * 4
+  // Outer glow layers (accent color)
+  const glowLayers = [
+    { expand: 18, line: 20, alpha: 0.04 },
+    { expand: 12, line: 14, alpha: 0.07 },
+    { expand: 7, line: 9, alpha: 0.10 },
+    { expand: 3, line: 5, alpha: 0.15 }
+  ]
+  for (const { expand, line, alpha } of glowLayers) {
+    roundRect(ctx, margin - expand, margin - expand, W - (margin - expand) * 2, H - (margin - expand) * 2, 32)
+    ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`
+    ctx.lineWidth = line
     ctx.stroke()
   }
 
+  // Card border: navy base + accent overlay
+  roundRect(ctx, margin, margin, W - margin * 2, H - margin * 2, 28)
+  ctx.strokeStyle = '#24324A'
+  ctx.lineWidth = 2.5
+  ctx.stroke()
+
+  roundRect(ctx, margin, margin, W - margin * 2, H - margin * 2, 28)
+  ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, 0.5)`
+  ctx.lineWidth = 1.5
+  ctx.stroke()
+
+  // Top accent line (4px, full brightness)
   const accentGrad = ctx.createLinearGradient(margin + 1, margin + 1, W - margin - 1, margin + 1)
   accentGrad.addColorStop(0, `rgba(${r}, ${g}, ${b}, 0)`)
-  accentGrad.addColorStop(0.3, `rgba(${r}, ${g}, ${b}, 0.9)`)
-  accentGrad.addColorStop(0.7, `rgba(${r}, ${g}, ${b}, 0.9)`)
+  accentGrad.addColorStop(0.25, `rgba(${r}, ${g}, ${b}, 1)`)
+  accentGrad.addColorStop(0.75, `rgba(${r}, ${g}, ${b}, 1)`)
   accentGrad.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`)
   ctx.fillStyle = accentGrad
-  ctx.fillRect(margin + 28, margin + 1, W - (margin + 28) * 2, 3)
+  ctx.fillRect(margin + 36, margin + 1, W - (margin + 36) * 2, 4)
 
-  // Icon
-  ctx.shadowColor = `rgba(${r}, ${g}, ${b}, 0.9)`
-  ctx.shadowBlur = 18
-  drawIcon(ctx, id, W / 2, 140, 120, color)
-  ctx.shadowBlur = 0
+  // Icon glow halo
+  const iconCX = W / 2
+  const iconCY = 158
+  const iconSize = 160
+  const halo = ctx.createRadialGradient(iconCX, iconCY, 0, iconCX, iconCY, 140)
+  halo.addColorStop(0, `rgba(${r}, ${g}, ${b}, 0.30)`)
+  halo.addColorStop(0.5, `rgba(${r}, ${g}, ${b}, 0.12)`)
+  halo.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`)
+  ctx.fillStyle = halo
+  ctx.fillRect(iconCX - 160, iconCY - 140, 320, 280)
 
-  // Title
-  ctx.shadowColor = `rgba(${r}, ${g}, ${b}, 0.6)`
-  ctx.shadowBlur = 12
-  ctx.font = 'bold 44px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
-  ctx.fillStyle = '#ffffff'
+  // Icon — PNG illustration
+  if (iconImage) {
+    ctx.drawImage(iconImage, iconCX - iconSize / 2, iconCY - iconSize / 2, iconSize, iconSize)
+  }
+
+  // Title (Fredoka, 700)
+  ctx.font = '700 44px "Fredoka", "Nunito", sans-serif'
+  ctx.fillStyle = '#F7FAFF'
   ctx.textAlign = 'center'
   ctx.textBaseline = 'middle'
 
@@ -102,30 +139,29 @@ function createCardTexture(project) {
 
   const lineH = 54
   const titleBlockH = lines.length * lineH
-  const titleY = 260
+  const titleY = 268
   lines.forEach((line, i) => {
     ctx.fillText(line, W / 2, titleY + i * lineH)
   })
-  ctx.shadowBlur = 0
 
-  // Screenshot placeholder
+  // Screenshot / chart placeholder
   const ssX = margin + 24
   const ssY = titleY + titleBlockH + 28
   const ssW = W - (margin + 24) * 2
   const ssH = 300
-  const ssR = 14
+  const ssR = 16
 
   roundRect(ctx, ssX, ssY, ssW, ssH, ssR)
   ctx.save()
   ctx.clip()
 
-  const bgGrad = ctx.createLinearGradient(ssX, ssY, ssX + ssW, ssY + ssH)
-  bgGrad.addColorStop(0, `rgba(${r}, ${g}, ${b}, 0.04)`)
-  bgGrad.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0.14)`)
-  ctx.fillStyle = bgGrad
+  const chartBg = ctx.createLinearGradient(ssX, ssY, ssX + ssW, ssY + ssH)
+  chartBg.addColorStop(0, `rgba(${r}, ${g}, ${b}, 0.06)`)
+  chartBg.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0.18)`)
+  ctx.fillStyle = chartBg
   ctx.fillRect(ssX, ssY, ssW, ssH)
 
-  ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, 0.12)`
+  ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, 0.15)`
   ctx.lineWidth = 1
   for (let row = 1; row <= 5; row++) {
     const ly = ssY + (ssH / 6) * row
@@ -137,8 +173,8 @@ function createCardTexture(project) {
 
   const barWidths = [0.72, 0.48, 0.6, 0.38, 0.52]
   const barSpacing = ssH * 0.12
-  ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, 0.28)`
-  ctx.lineWidth = 7
+  ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, 0.4)`
+  ctx.lineWidth = 8
   ctx.lineCap = 'round'
   barWidths.forEach((bw, i) => {
     const by = ssY + barSpacing + i * barSpacing * 1.28
@@ -149,15 +185,15 @@ function createCardTexture(project) {
   })
 
   const dotPositions = [[0.12, 0.22], [0.28, 0.18], [0.45, 0.28], [0.62, 0.15], [0.78, 0.24], [0.88, 0.19]]
-  ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.5)`
+  ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.65)`
   dotPositions.forEach(([dx, dy]) => {
     ctx.beginPath()
-    ctx.arc(ssX + ssW * dx, ssY + ssH * dy + ssH * 0.5, 5, 0, Math.PI * 2)
+    ctx.arc(ssX + ssW * dx, ssY + ssH * dy + ssH * 0.5, 6, 0, Math.PI * 2)
     ctx.fill()
   })
 
-  ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, 0.35)`
-  ctx.lineWidth = 1.5
+  ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, 0.45)`
+  ctx.lineWidth = 2
   ctx.beginPath()
   dotPositions.forEach(([dx, dy], i) => {
     const px = ssX + ssW * dx
@@ -170,19 +206,19 @@ function createCardTexture(project) {
   ctx.restore()
 
   roundRect(ctx, ssX, ssY, ssW, ssH, ssR)
-  ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, 0.3)`
-  ctx.lineWidth = 1
+  ctx.strokeStyle = '#24324A'
+  ctx.lineWidth = 1.5
   ctx.stroke()
 
-  // Intent tags
+  // Tag pills (Inter 500)
   if (tags && tags.length) {
-    const tagAreaY = ssY + ssH + 32
+    const tagAreaY = ssY + ssH + 36
     const tagList = tags.slice(0, 4)
-    ctx.font = '22px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
+    ctx.font = '500 21px "Inter", sans-serif'
     ctx.textAlign = 'center'
 
-    const tagPad = 16
-    const tagH = 36
+    const tagPad = 18
+    const tagH = 38
     const tagSpacing = 10
     let totalTagW = 0
     const tagWidths = tagList.map(t => {
@@ -197,28 +233,23 @@ function createCardTexture(project) {
     tagList.forEach((tag, idx) => {
       const tw = tagWidths[idx]
       roundRect(ctx, tagX, tagAreaY - tagH / 2, tw, tagH, tagH / 2)
-      ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.18)`
+      ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.22)`
       ctx.fill()
-      ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, 0.45)`
-      ctx.lineWidth = 1.5
+      ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, 0.5)`
+      ctx.lineWidth = 2
       ctx.stroke()
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.8)'
+      ctx.fillStyle = '#F7FAFF'
+      ctx.globalAlpha = 0.85
       ctx.fillText(tag, tagX + tw / 2, tagAreaY)
+      ctx.globalAlpha = 1
       tagX += tw + tagSpacing
     })
   }
 
-  const vignette = ctx.createRadialGradient(W / 2, H / 2, W * 0.2, W / 2, H / 2, W * 0.75)
-  vignette.addColorStop(0, 'rgba(0,0,0,0)')
-  vignette.addColorStop(1, 'rgba(0,0,0,0.3)')
-  roundRect(ctx, margin, margin, W - margin * 2, H - margin * 2, 28)
-  ctx.fillStyle = vignette
-  ctx.fill()
-
   return new CanvasTexture(canvas)
 }
 
-export function createCards(projects, scene) {
+export function createCards(projects, scene, iconImages) {
   const cards = []
   const count = projects.length
   const radius = 8
@@ -232,17 +263,14 @@ export function createCards(projects, scene) {
     const z = -Math.cos(angle) * radius + radius * 0.3
     const y = Math.sin(angle * 2) * 0.5
 
-    const texture = createCardTexture(project)
+    const iconImage = iconImages ? iconImages[i] : null
+    const texture = createCardTexture(project, iconImage)
     const geometry = new PlaneGeometry(2.5, 3.5)
-    const material = new MeshStandardMaterial({
+    const material = new MeshBasicMaterial({
       map: texture,
       side: DoubleSide,
-      roughness: 0.3,
-      metalness: 0.2,
       transparent: true,
-      opacity: 0.95,
-      emissive: new Color(project.color),
-      emissiveIntensity: 0.15
+      opacity: 0.95
     })
 
     const mesh = new Mesh(geometry, material)

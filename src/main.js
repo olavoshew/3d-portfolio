@@ -1,7 +1,7 @@
 import { WebGLRenderer, PerspectiveCamera, Scene, Clock, Vector3 } from 'three'
 import { setupEnvironment } from './scene/environment.js'
 import { createCameraController } from './scene/camera.js'
-import { createCards, setupInteraction, createCardAnimator } from './scene/cards.js'
+import { createCards, setupInteraction, createCardAnimator, loadIconImages } from './scene/cards.js'
 import { createStarfield, updateStarfield } from './scene/starfield.js'
 import { showProject, hideOverlay, hideOverlayFast, onCloseRequested, isOverlayVisible } from './ui/overlay.js'
 import { createNav, setActiveDot, clearActiveDot, onDotClick } from './ui/nav.js'
@@ -31,7 +31,8 @@ const cameraController = createCameraController(camera)
 const cardAnimator = createCardAnimator()
 const clock = new Clock()
 
-const cards = createCards(projects, scene)
+const iconImages = await loadIconImages(projects)
+const cards = createCards(projects, scene, iconImages)
 const interaction = setupInteraction(cards, camera, renderer)
 
 let selectedCard = null
