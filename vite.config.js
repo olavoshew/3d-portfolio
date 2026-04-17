@@ -1,5 +1,8 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-  assetsInclude: ['**/*.gltf', '**/*.glb']
+  assetsInclude: ['**/*.gltf', '**/*.glb'],
+  build: {
+    target: 'esnext'
+  }
 })
