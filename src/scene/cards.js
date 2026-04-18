@@ -100,18 +100,10 @@ function createCardTexture(project, iconImage) {
   ctx.fillStyle = accentGrad
   ctx.fillRect(margin + 36, margin + 1, W - (margin + 36) * 2, 4)
 
-  // Icon glow halo
+  // Icon — PNG illustration
   const iconCX = W / 2
   const iconCY = 158
   const iconSize = 160
-  const halo = ctx.createRadialGradient(iconCX, iconCY, 0, iconCX, iconCY, 140)
-  halo.addColorStop(0, `rgba(${r}, ${g}, ${b}, 0.30)`)
-  halo.addColorStop(0.5, `rgba(${r}, ${g}, ${b}, 0.12)`)
-  halo.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`)
-  ctx.fillStyle = halo
-  ctx.fillRect(iconCX - 160, iconCY - 140, 320, 280)
-
-  // Icon — PNG illustration
   if (iconImage) {
     ctx.drawImage(iconImage, iconCX - iconSize / 2, iconCY - iconSize / 2, iconSize, iconSize)
   }

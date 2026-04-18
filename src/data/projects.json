@@ -2,7 +2,7 @@
   {
     "id": "job-intel-agent",
     "title": "Job Intel Agent",
-    "description": "Paste a job URL or raw text, upload your CV, and get back a match score (0-100%), ranked skill gaps, talking points, and a tailored pitch. Also rewrites your CV for that specific role.",
+    "description": "Paste a job URL. Get back a structured report: what the role wants, how your CV scores against it, missing keywords, and suggested talking points.",
     "tech": ["Python", "FastAPI", "Anthropic API", "Pydantic"],
     "tags": ["AI Tool", "Career Match", "CV Rewriter", "REST API"],
     "skills": ["Prompt Engineering", "REST API", "AI Integration"],
@@ -18,7 +18,7 @@
   {
     "id": "unity-showcase",
     "title": "Unity Showcase",
-    "description": "Interactive 3D product visualization built in Unity. Lets users rotate, zoom, and inspect objects with realistic PBR materials and dynamic lighting.",
+    "description": "A small, complete, polished Unity game published on itch.io as a WebGL build. Playable in any browser in 30 seconds, with a clean GitHub repo showing real C# architecture.",
     "tech": ["Unity", "C#", "ShaderGraph", "WebGL"],
     "tags": ["3D Viewer", "Real-time", "Product Viz", "WebGL"],
     "skills": ["3D Graphics", "PBR Materials", "Real-time Rendering"],
@@ -34,7 +34,7 @@
   {
     "id": "3d-portfolio",
     "title": "3D Portfolio",
-    "description": "This site. A spatial portfolio where projects float in 3D space and the camera moves between them. Built with Three.js and vanilla JS — no framework.",
+    "description": "This site. A Three.js portfolio where navigating between sections feels spatial. The portfolio itself is the strongest demo, proving the skill without a project list.",
     "tech": ["Three.js", "Vite", "GSAP", "JavaScript"],
     "tags": ["Spatial UI", "Interactive", "WebGL", "This Site"],
     "skills": ["WebGL", "Spatial UI", "Performance Optimization"],
@@ -50,7 +50,7 @@
   {
     "id": "video-automation",
     "title": "Video Automation",
-    "description": "Automated video editing pipeline that processes raw footage into polished content. Handles cuts, transitions, overlays, and audio sync programmatically.",
+    "description": "A CLI tool that takes a raw video file and outputs a complete content package: auto-generated chapters, cleaned subtitles, thumbnail-moment suggestions, and a YouTube description draft.",
     "tech": ["Python", "FFmpeg", "Pillow", "MoviePy"],
     "tags": ["Automation", "Pipeline", "Media", "CLI"],
     "skills": ["Pipeline Design", "Media Processing", "Automation"],
@@ -66,7 +66,7 @@
   {
     "id": "webar",
     "title": "WebAR",
-    "description": "Browser-based augmented reality experience that runs without an app install. Uses device camera and WebXR to overlay 3D content on the real world.",
+    "description": "A marker-based AR experience that runs directly in the browser, no app install. Scan a QR code, point your phone at a printed card or screen marker, and 3D content appears.",
     "tech": ["A-Frame", "AR.js", "Three.js", "WebXR"],
     "tags": ["AR Experience", "No-App", "Mobile Web", "Camera"],
     "skills": ["Augmented Reality", "Computer Vision", "Mobile Web"],
@@ -82,7 +82,7 @@
   {
     "id": "rag-tool",
     "title": "RAG Tool",
-    "description": "Retrieval-augmented generation system for querying large document sets. Embeds documents into a vector store and uses LLMs to answer questions with source citations.",
+    "description": "Upload any PDF or set of documents and ask questions. Answers are grounded in the actual document content with source citations, no hallucination.",
     "tech": ["Python", "LangChain", "ChromaDB", "OpenAI"],
     "tags": ["AI Search", "Document QA", "Vector DB", "LLM"],
     "skills": ["Vector Databases", "Embeddings", "LLM Integration"],
@@ -98,7 +98,7 @@
   {
     "id": "game-jam",
     "title": "Game Jam",
-    "description": "A game built in 48 hours for a competitive jam. Fast-paced 2D gameplay with procedural level generation and a custom physics system.",
+    "description": "A real game jam entry on itch.io, built within official jam constraints (48-72 hours), with a devlog postmortem. The constraint is the point: it proves execution under pressure.",
     "tech": ["Unity", "C#", "2D Toolkit", "Photoshop"],
     "tags": ["Game Dev", "48h Build", "Procedural", "Physics"],
     "skills": ["Game Design", "Procedural Generation", "Rapid Prototyping"],
@@ -114,7 +114,7 @@
   {
     "id": "cli-tool",
     "title": "CLI Tool",
-    "description": "Developer productivity tool that runs from the terminal. Automates repetitive project setup, file scaffolding, and config generation tasks.",
+    "description": "A Python CLI tool that solves a specific, real workflow pain point. Built because a real process was slow, not to demonstrate a skill set.",
     "tech": ["Node.js", "Commander", "Chalk", "Inquirer"],
     "tags": ["Dev Tools", "Scaffolding", "Productivity", "Terminal"],
     "skills": ["DX Tooling", "File System API", "CLI Design"],
@@ -130,7 +130,7 @@
   {
     "id": "motion-library",
     "title": "Motion Library",
-    "description": "A collection of reusable animation primitives for web interfaces. Provides spring physics, easing curves, and gesture-driven motion out of the box.",
+    "description": "A GitHub Pages site showcasing 10-12 polished UI micro-interactions, each with clean code, documented UX reasoning, and verified keyboard/screen-reader accessibility.",
     "tech": ["TypeScript", "GSAP", "Web Animations API", "npm"],
     "tags": ["Animation", "Spring Physics", "npm Package", "Web"],
     "skills": ["Animation Systems", "Physics Simulation", "Package Design"],
@@ -146,7 +146,7 @@
   {
     "id": "ar-business-card",
     "title": "AR Business Card",
-    "description": "Physical business card that triggers an AR experience when scanned. Displays a 3D model, contact links, and portfolio highlights floating above the card.",
+    "description": "A QR code on your business card opens an AR experience: your skills float as 3D nodes, and a Claude-powered chatbot below the AR scene answers questions about your work.",
     "tech": ["Unity", "Vuforia", "Blender", "ARCore"],
     "tags": ["Image Tracking", "3D Model", "AR Deploy", "Mobile"],
     "skills": ["Image Tracking", "3D Modeling", "AR Deployment"],
