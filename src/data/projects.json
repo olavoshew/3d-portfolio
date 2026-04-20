@@ -80,20 +80,20 @@
     "media": { "type": "iframe", "src": "" }
   },
   {
-    "id": "rag-tool",
-    "title": "RAG Tool",
-    "description": "Upload any PDF or set of documents and ask questions. Answers are grounded in the actual document content with source citations, no hallucination.",
-    "tech": ["Python", "LangChain", "ChromaDB", "OpenAI"],
-    "tags": ["AI Search", "Document QA", "Vector DB", "LLM"],
-    "skills": ["Vector Databases", "Embeddings", "LLM Integration"],
+    "id": "rag-qa-tool",
+    "title": "RAG Document Q&A",
+    "description": "Upload any PDF, ask natural-language questions, get cited answers grounded in the document. Built from scratch with no LangChain. Chunks are embedded locally with sentence-transformers, stored in ChromaDB, and answers are synthesized by Claude with page-level citations.",
+    "tech": ["Python", "FastAPI", "ChromaDB", "Sentence-Transformers", "Anthropic API"],
+    "tags": ["AI Search", "Document QA", "Vector DB", "RAG", "LLM"],
+    "skills": ["Vector Databases", "Embeddings", "LLM Integration", "Prompt Engineering", "REST API"],
     "platform": "Web / API",
-    "color": "#FFD34D",
-    "buildTime": "~14 min",
-    "prompts": 1,
-    "url": "https://github.com/olavoshew/rag-tool",
-    "github": "https://github.com/olavoshew/rag-tool",
-    "github_repo": "rag-tool",
-    "media": { "type": "video", "src": "" }
+    "color": "#5E6AD2",
+    "buildTime": "~8 hrs",
+    "prompts": 4,
+    "url": "https://huggingface.co/spaces/zehsnuts/rag-qa-tool",
+    "github": "https://github.com/olavoshew/rag-qa-tool",
+    "github_repo": "rag-qa-tool",
+    "media": { "type": "iframe", "src": "https://zehsnuts-rag-qa-tool.hf.space" }
   },
   {
     "id": "game-jam",
