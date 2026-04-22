@@ -174,7 +174,7 @@ export function drawIcon(ctx, iconKey, cx, cy, size, color) {
       ctx.fill()
       break
     }
-    case 'cli-tool': {
+    case 'invoicex': {
       roundRect(ctx, s * 0.04, s * 0.1, s * 0.92, s * 0.8, s * 0.08)
       ctx.stroke()
       ctx.beginPath()

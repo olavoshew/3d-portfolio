@@ -112,19 +112,19 @@
     "media": { "type": "video", "src": "" }
   },
   {
-    "id": "cli-tool",
-    "title": "CLI Tool",
-    "description": "A Python CLI tool that solves a specific, real workflow pain point. Built because a real process was slow, not to demonstrate a skill set.",
-    "tech": ["Node.js", "Commander", "Chalk", "Inquirer"],
-    "tags": ["Dev Tools", "Scaffolding", "Productivity", "Terminal"],
-    "skills": ["DX Tooling", "File System API", "CLI Design"],
+    "id": "invoicex",
+    "title": "InvoiceX",
+    "description": "Drop a folder of PDFs, get a clean CSV: vendor, invoice number, date, total, and GST extracted for each file. Built from a real problem — manually copying invoice data twice a week — with regex-only extraction, 27 tests, and a --dry-run flag.",
+    "tech": ["Python", "Click", "Rich", "pdfplumber"],
+    "tags": ["PDF Parsing", "Invoice Data", "Automation", "CLI"],
+    "skills": ["PDF Extraction", "CLI Design", "Python Packaging"],
     "platform": "CLI",
     "color": "#8BA3B8",
     "buildTime": "~6 min",
     "prompts": 1,
-    "url": "https://github.com/olavoshew/cli-tool",
-    "github": "https://github.com/olavoshew/cli-tool",
-    "github_repo": "cli-tool",
+    "url": "https://github.com/olavoshew/invoicex",
+    "github": "https://github.com/olavoshew/invoicex",
+    "github_repo": "invoicex",
     "media": { "type": "", "src": "" }
   },
   {
