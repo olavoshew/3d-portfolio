@@ -32,7 +32,9 @@ const cardAnimator = createCardAnimator()
 const clock = new Clock()
 
 const iconImages = await loadIconImages(projects)
-const cards = createCards(projects, scene, iconImages)
+const activeProjects = projects.filter(p => !p.disabled)
+const activeIconImages = projects.flatMap((p, i) => p.disabled ? [] : [iconImages[i]])
+const cards = createCards(activeProjects, scene, activeIconImages)
 const interaction = setupInteraction(cards, camera, renderer)
 
 let selectedCard = null
@@ -132,7 +134,7 @@ onDotClick((index) => {
 
 onCloseRequested(deselectAndGoHome)
 
-createNav(projects)
+createNav(activeProjects)
 createAudioController()
 
 function animate() {

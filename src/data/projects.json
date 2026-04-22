@@ -29,7 +29,8 @@
     "url": "https://github.com/olavoshew/unity-showcase",
     "github": "https://github.com/olavoshew/unity-showcase",
     "github_repo": "unity-showcase",
-    "media": { "type": "video", "src": "" }
+    "media": { "type": "video", "src": "" },
+    "disabled": true
   },
   {
     "id": "3d-portfolio",
@@ -50,17 +51,17 @@
   {
     "id": "video-automation",
     "title": "Video Automation",
-    "description": "A CLI tool that takes a raw video file and outputs a complete content package: auto-generated chapters, cleaned subtitles, thumbnail-moment suggestions, and a YouTube description draft.",
-    "tech": ["Python", "FFmpeg", "Pillow", "MoviePy"],
+    "description": "A CLI tool that takes a raw video file and outputs a complete content package: auto-generated chapters, cleaned subtitles, thumbnail-moment suggestions, and a YouTube description draft. FFmpeg extracts audio; Whisper transcribes; Claude analyses.",
+    "tech": ["Python", "FFmpeg", "Whisper", "Anthropic API"],
     "tags": ["Automation", "Pipeline", "Media", "CLI"],
-    "skills": ["Pipeline Design", "Media Processing", "Automation"],
+    "skills": ["Pipeline Design", "Media Processing", "AI Integration"],
     "platform": "CLI",
     "color": "#FF6B6B",
     "buildTime": "~8 min",
-    "prompts": 1,
-    "url": "https://github.com/olavoshew/video-automation",
-    "github": "https://github.com/olavoshew/video-automation",
-    "github_repo": "video-automation",
+    "prompts": 4,
+    "url": "https://github.com/olavoshew/vwtools",
+    "github": "https://github.com/olavoshew/vwtools",
+    "github_repo": "vwtools",
     "media": { "type": "video", "src": "" }
   },
   {
@@ -109,7 +110,8 @@
     "url": "https://github.com/olavoshew/game-jam",
     "github": "https://github.com/olavoshew/game-jam",
     "github_repo": "game-jam",
-    "media": { "type": "video", "src": "" }
+    "media": { "type": "video", "src": "" },
+    "disabled": true
   },
   {
     "id": "invoicex",
@@ -141,7 +143,8 @@
     "url": "https://github.com/olavoshew/motion-library",
     "github": "https://github.com/olavoshew/motion-library",
     "github_repo": "motion-library",
-    "media": { "type": "", "src": "" }
+    "media": { "type": "", "src": "" },
+    "disabled": true
   },
   {
     "id": "ar-business-card",
@@ -157,6 +160,7 @@
     "url": "https://github.com/olavoshew/ar-business-card",
     "github": "https://github.com/olavoshew/ar-business-card",
     "github_repo": "ar-business-card",
-    "media": { "type": "video", "src": "" }
+    "media": { "type": "video", "src": "" },
+    "disabled": true
   }
 ]
