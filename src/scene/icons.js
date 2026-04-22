@@ -241,6 +241,86 @@ export function drawIcon(ctx, iconKey, cx, cy, size, color) {
       ctx.stroke()
       break
     }
+    case 'docket-whale': {
+      roundRect(ctx, s * 0.1, s * 0.08, s * 0.8, s * 0.84, s * 0.06)
+      ctx.stroke()
+      ctx.beginPath()
+      ctx.moveTo(s * 0.1, s * 0.28)
+      ctx.lineTo(s * 0.9, s * 0.28)
+      ctx.stroke()
+      ctx.beginPath()
+      ctx.moveTo(s * 0.3, s * 0.18)
+      ctx.lineTo(s * 0.5, s * 0.18)
+      ctx.stroke()
+      for (let i = 0; i < 3; i++) {
+        const ry = s * 0.42 + i * s * 0.18
+        ctx.beginPath()
+        ctx.moveTo(s * 0.2, ry)
+        ctx.lineTo(s * 0.54, ry)
+        ctx.stroke()
+        ctx.beginPath()
+        ctx.arc(s * 0.74, ry, s * 0.05, 0, Math.PI * 2)
+        ctx.stroke()
+      }
+      break
+    }
+    case 'roley': {
+      ctx.beginPath()
+      ctx.arc(s * 0.38, s * 0.48, s * 0.3, 0, Math.PI * 2)
+      ctx.stroke()
+      ctx.beginPath()
+      ctx.moveTo(s * 0.38 + s * 0.21, s * 0.48 + s * 0.21)
+      ctx.lineTo(s * 0.86, s * 0.86)
+      ctx.stroke()
+      roundRect(ctx, s * 0.54, s * 0.04, s * 0.4, s * 0.28, s * 0.06)
+      ctx.stroke()
+      ctx.beginPath()
+      ctx.arc(s * 0.74, s * 0.04 + s * 0.28 + s * 0.05, s * 0.04, 0, Math.PI * 2)
+      ctx.fill()
+      break
+    }
+    case 'psyche': {
+      ctx.beginPath()
+      ctx.arc(h, s * 0.52, s * 0.28, Math.PI, 0)
+      ctx.stroke()
+      ctx.beginPath()
+      ctx.moveTo(h + s * 0.28, s * 0.52)
+      ctx.arc(h + s * 0.14, s * 0.66, s * 0.14, 0, Math.PI)
+      ctx.stroke()
+      ctx.beginPath()
+      ctx.arc(h, s * 0.14, s * 0.1, 0, Math.PI * 2)
+      ctx.fill()
+      for (let i = 0; i < 3; i++) {
+        const nx = s * (0.18 + i * 0.32)
+        ctx.beginPath()
+        ctx.arc(nx, s * 0.8, s * 0.06, 0, Math.PI * 2)
+        ctx.stroke()
+      }
+      break
+    }
+    case 'grazi-assistant': {
+      roundRect(ctx, s * 0.06, s * 0.26, s * 0.76, s * 0.56, s * 0.07)
+      ctx.stroke()
+      ctx.beginPath()
+      ctx.moveTo(s * 0.06, s * 0.34)
+      ctx.lineTo(s * 0.44, s * 0.56)
+      ctx.lineTo(s * 0.82, s * 0.34)
+      ctx.stroke()
+      ctx.beginPath()
+      ctx.arc(s * 0.78, s * 0.22, s * 0.16, 0, Math.PI * 2)
+      ctx.stroke()
+      ctx.beginPath()
+      ctx.moveTo(s * 0.78, s * 0.1)
+      ctx.lineTo(s * 0.78, s * 0.14)
+      ctx.moveTo(s * 0.78, s * 0.3)
+      ctx.lineTo(s * 0.78, s * 0.34)
+      ctx.moveTo(s * 0.66, s * 0.22)
+      ctx.lineTo(s * 0.7, s * 0.22)
+      ctx.moveTo(s * 0.86, s * 0.22)
+      ctx.lineTo(s * 0.9, s * 0.22)
+      ctx.stroke()
+      break
+    }
     default: {
       ctx.beginPath()
       ctx.arc(h, h, h * 0.7, 0, Math.PI * 2)

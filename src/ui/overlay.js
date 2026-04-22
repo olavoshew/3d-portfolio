@@ -168,6 +168,52 @@ function injectStyles() {
       color: rgba(255,255,255,0.9);
     }
 
+    .op-repo {
+      margin-bottom: 16px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .op-repo.hidden {
+      display: none;
+    }
+
+    .op-repo-label {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 4px;
+    }
+
+    .op-repo-value {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 2px;
+      color: #fff;
+    }
+
+    .op-repo-reason {
+      margin: 0;
+      font-size: 12px;
+      line-height: 1.45;
+      color: rgba(255,255,255,0.72);
+    }
+
+    .op-repo.public {
+      border-color: rgba(126, 247, 212, 0.45);
+      background: rgba(126, 247, 212, 0.12);
+    }
+
+    .op-repo.private {
+      border-color: rgba(255, 160, 95, 0.5);
+      background: rgba(255, 160, 95, 0.14);
+    }
+
     .op-tags {
       display: flex;
       flex-wrap: wrap;
@@ -281,6 +327,7 @@ function createOverlayDOM() {
             <span class="op-stat-value op-stat-commits">...</span>
           </div>
         </div>
+        <div class="op-repo hidden"></div>
         <div class="op-tags"></div>
         <div class="op-links"></div>
       </div>
@@ -335,6 +382,34 @@ function populateVideo(project) {
   }
 }
 
+function populateRepoStatus(project) {
+  const container = overlay.querySelector('.op-repo')
+  const visibility = project.repoVisibility || null
+  const isPublicSafe = typeof project.repoPublicSafe === 'boolean'
+    ? project.repoPublicSafe
+    : null
+  const privateReason = project.repoPrivateReason || ''
+
+  if (!visibility && isPublicSafe === null && !privateReason) {
+    container.className = 'op-repo hidden'
+    container.innerHTML = ''
+    return
+  }
+
+  const isPublic = visibility === 'public' && isPublicSafe !== false
+  const status = isPublic ? 'Public Repo Safe' : 'Private Repo'
+  const reason = isPublic
+    ? 'Safe to share publicly (no personal info flagged).'
+    : (privateReason || 'Not available for public sharing.')
+
+  container.className = `op-repo ${isPublic ? 'public' : 'private'}`
+  container.innerHTML = `
+    <span class="op-repo-label">Repository</span>
+    <span class="op-repo-value">${status}</span>
+    <p class="op-repo-reason">${reason}</p>
+  `
+}
+
 function populateTags(project) {
   const container = overlay.querySelector('.op-tags')
   const tags = []
@@ -352,11 +427,12 @@ function populateTags(project) {
 function populateLinks(project) {
   const container = overlay.querySelector('.op-links')
   const links = []
+  const canShowGithub = project.repoVisibility !== 'private'
 
   if (project.url) {
     links.push(`<a class="op-link primary" href="${project.url}" target="_blank" rel="noopener noreferrer">View Project</a>`)
   }
-  if (project.github) {
+  if (project.github && canShowGithub) {
     links.push(`<a class="op-link ghost" href="${project.github}" target="_blank" rel="noopener noreferrer">GitHub</a>`)
   }
 
@@ -403,6 +479,7 @@ export async function showProject(project) {
   overlay.querySelector('.op-stat-build').textContent = project.buildTime || '...'
   overlay.querySelector('.op-stat-commits').textContent = project.prompts || '1'
 
+  populateRepoStatus(project)
   populateTags(project)
   populateLinks(project)
 
